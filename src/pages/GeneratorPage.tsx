@@ -3,11 +3,17 @@ import { render } from "../core/qr"
 import { useEffect, useState } from "react"
 import type { Params } from "../core/params"
 import './GeneratorPage.css'
+import { Sidebar } from "../components/Sidebar/Sidebar"
+import { Content } from "../components/Content/Content"
 
-export function GeneratorPage() {
+interface GeneratorPageProps {
+    theme: 'light' | 'dark'
+    toggleTheme: () => void
+}
+
+export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
     const [src, setSrc] = useState<string>()
     const [params, setParams] = useState<Params>(createParams(''))
-    const [draft, setDraft] = useState('')
 
     useEffect(
         () => {
@@ -27,21 +33,17 @@ export function GeneratorPage() {
         [params]
     )
 
+    const commitData = (value: string) =>
+        setParams(prev => ({ ...prev, data: value }))
+
     return (
-        <div>
-            <form onSubmit={e => {
-                e.preventDefault()
-                setParams({ ...params, data: draft })
-            }}>
-                <input
-                    value={draft}
-                    onChange={e => setDraft(e.target.value)}
-                    placeholder="Type URL and press Enter"
-                />
-            </form>
-            {params.data && src
-                ? <img src={src} alt="qr" />
-                : <p>Type something to generate a QR Code.</p>}
+        <div className="box">
+            <Sidebar
+                theme={theme}
+                toggleTheme={toggleTheme}
+                onSubmitData={commitData}
+            />
+            <Content src={src} hasData={!!params.data} />
         </div>
     )
 }
