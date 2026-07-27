@@ -42,6 +42,8 @@ export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
                 theme={theme}
                 toggleTheme={toggleTheme}
                 onSubmitData={commitData}
+                src={src}
+                format={params.format}
             />
             <Content src={src} hasData={!!params.data} />
         </div>
