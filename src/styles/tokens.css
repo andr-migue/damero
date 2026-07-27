@@ -1,0 +1,43 @@
+:root {
+  /* Light mode */
+  --color-bg: var(--color-primary-2);
+  --color-surface: var(--color-neutral-1);
+  --color-surface-content: var(--color-neutral-2);
+  --color-text: var(--color-neutral-9);
+  --color-text-muted: var(--color-neutral-5);
+  --color-accent: var(--color-primary-4);
+  --color-accent-hover: var(--color-primary-3);
+  --color-accent-subtle: var(--color-primary-1);
+  --color-secondary: var(--color-secondary-5);
+  --color-secondary-hover: var(--color-secondary-6);
+  --color-border: var(--color-neutral-1);
+
+  /* Typography */
+  --font-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 3rem;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+}
+
+[data-theme='dark'] {
+  --color-bg:            var(--color-neutral-10);
+  --color-surface:       var(--color-neutral-9);
+  --color-border:        var(--color-neutral-8);
+  --color-text:          var(--color-neutral-2);
+  --color-text-muted:    var(--color-neutral-5);
+  --color-accent:        var(--color-primary-4);
+  --color-accent-hover:  var(--color-primary-6);
+  --color-accent-subtle: var(--color-primary-9);
+  --color-secondary:       var(--color-secondary-4);
+  --color-secondary-hover: var(--color-secondary-3);
+  --color-surface-content: var(--color-neutral-8);
+}
