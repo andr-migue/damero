@@ -1,4 +1,5 @@
 type ErrorCorrection = 'L' | 'M' | 'Q' | 'H'
+type Format = 'svg' | 'png'
 type LogoKind = 'raster' | 'svg'
 type Logo = {
     source: Blob
@@ -15,6 +16,7 @@ export type Params = {
     margin: number
     error: ErrorCorrection
     version?: number
+    format: Format
 }
 
 export const DEFAULTS = {
@@ -24,6 +26,7 @@ export const DEFAULTS = {
   size: 512,
   margin: 32,
   error: 'H',
+  format: 'svg'
 } as const
 
 export function createParams(data: string): Params {

@@ -1,5 +1,5 @@
 import { createParams } from "../core/params"
-import { renderSVG } from "../core/qr"
+import { render } from "../core/qr"
 import { useEffect, useState } from "react"
 
 export function GeneratorPage() {
@@ -8,7 +8,7 @@ export function GeneratorPage() {
     useEffect(
         () => {
             let url: string
-            renderSVG(createParams('https://example.com')).then(blob => {
+            render(createParams('https://example.com')).then(blob => {
                 url = URL.createObjectURL(blob)
                 setSrc(url)
             })

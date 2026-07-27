@@ -1,7 +1,7 @@
 import QRCodeStyling from "qr-code-styling";
 import type { Params } from "./params";
 
-export async function renderSVG(params: Params): Promise<Blob> {
+export async function render(params: Params): Promise<Blob> {
     const qr = new QRCodeStyling({
         width: params.size,
         height: params.size,
@@ -11,5 +11,5 @@ export async function renderSVG(params: Params): Promise<Blob> {
         backgroundOptions: { color: params.backColor },
         qrOptions: { errorCorrectionLevel: params.error },
     })
-    return qr.getRawData('svg')
+    return qr.getRawData(params.format)
 }
