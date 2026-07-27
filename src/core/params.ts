@@ -12,17 +12,17 @@ export type Params = {
     fillColor: string
     backColor: string
     size: number
-    border: number
+    margin: number
     error: ErrorCorrection
     version?: number
 }
 
-const DEFAULTS = {
+export const DEFAULTS = {
   logoScale: 0.3,
   fillColor: '#000000',
   backColor: '#FFFFFF',
-  size: 10,
-  border: 4,
+  size: 512,
+  margin: 32,
   error: 'H',
 } as const
 
