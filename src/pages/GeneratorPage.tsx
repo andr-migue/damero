@@ -5,6 +5,7 @@ import type { Params } from "../core/params"
 import './GeneratorPage.css'
 import { Sidebar } from "../components/Sidebar/Sidebar"
 import { Content } from "../components/Content/Content"
+import { useObjectURL } from "../hooks/useObjectURL"
 
 interface GeneratorPageProps {
     theme: 'light' | 'dark'
@@ -12,29 +13,20 @@ interface GeneratorPageProps {
 }
 
 export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
-    const [src, setSrc] = useState<string>()
+    const [blob, setBlob] = useState<Blob>()
     const [params, setParams] = useState<Params>(createParams(''))
 
     useEffect(
         () => {
             if (!params.data) return
-
-            let url: string | undefined
-
-            render(params).then(blob => {
-                url = URL.createObjectURL(blob)
-                setSrc(url)
-            })
-
-            return () => {
-                if (url) URL.revokeObjectURL(url)
-            }
-        },
-        [params]
+            let cancelled = false
+            render(params).then(blob => {if (!cancelled) setBlob(blob)})
+            return () => { cancelled = true }
+        }, [params]
     )
 
-    const commitData = (value: string) =>
-        setParams(prev => ({ ...prev, data: value }))
+    const src = useObjectURL(blob)
+    const commitData = (value: string) => setParams(prev => ({ ...prev, data: value }))
 
     return (
         <div className="box">
