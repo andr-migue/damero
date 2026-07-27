@@ -1,6 +1,7 @@
 import { createParams } from "../core/params"
 import { render } from "../core/qr"
 import { useEffect, useState } from "react"
+import './GeneratorPage.css'
 
 export function GeneratorPage() {
     const [src, setSrc] = useState<string>()
