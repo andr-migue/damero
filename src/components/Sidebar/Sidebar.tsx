@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import './Sidebar.css'
 import type { Params } from '../../core/params'
+import { SliderControl } from '../controls/SliderControl/SliderControl'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
     toggleTheme: () => void
+    params: Params
     onSubmitData: (value: string) => void
     src: string | undefined
-    format: Params['format']
+    updateSize: (value: number) => void
+    updateMargin: (value: number) => void
 }
 
-export function Sidebar({ theme, toggleTheme, onSubmitData, src, format }: SidebarProps) {
+export function Sidebar({ theme, toggleTheme, params,onSubmitData, src, updateSize, updateMargin }: SidebarProps) {
     const [draft, setDraft] = useState('')
 
     return (
@@ -29,9 +32,28 @@ export function Sidebar({ theme, toggleTheme, onSubmitData, src, format }: Sideb
                     placeholder="Type URL and press Enter"
                 />
             </form>
+
+            <SliderControl
+                label="size-slider"
+                value={params.size}
+                min={256}
+                max={1024}
+                step={1}
+                onChange={updateSize}
+            />
+
+            <SliderControl
+                label="margin-slider"
+                value={params.margin}
+                min={16}
+                max={64}
+                step={1}
+                onChange={updateMargin}
+            />
+
             {src && (
-                <a className="download-button" href={src} download={`qr.${format}`}>
-                    Descargar {format.toUpperCase()}
+                <a className="download-button" href={src} download={`qr.${params.format}`}>
+                    Descargar {params.format.toUpperCase()}
                 </a>
             )}
         </aside>

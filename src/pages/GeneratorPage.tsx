@@ -27,15 +27,19 @@ export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
 
     const src = useObjectURL(blob)
     const commitData = (value: string) => setParams(prev => ({ ...prev, data: value }))
+    const updateSize = (value: number) => setParams(prev => ({ ...prev, size: value }))
+    const updateMargin = (value: number) => setParams(prev => ({ ...prev, margin: value }))
 
     return (
         <div className="box">
             <Sidebar
                 theme={theme}
                 toggleTheme={toggleTheme}
+                params={params}
                 onSubmitData={commitData}
                 src={src}
-                format={params.format}
+                updateSize={updateSize}
+                updateMargin={updateMargin}
             />
             <Content src={src} hasData={!!params.data} />
         </div>

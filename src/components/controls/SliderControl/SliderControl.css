@@ -1,0 +1,23 @@
+.slider-control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.slider-control__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.slider-control__value {
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.slider-control input[type="range"] {
+    width: 100%;
+    accent-color: var(--color-accent);
+}
