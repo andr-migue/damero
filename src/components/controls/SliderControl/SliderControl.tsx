@@ -15,9 +15,9 @@ export function SliderControl({ label, value, min, max, step, unit, onChange }: 
         <label className="slider-control">
             <span className="slider-control__label">
                 {label}
-                <span className="slider-control__value">
-                    {value}{unit && ` ${unit}`}
-                </span>
+            </span>
+            <span className="slider-control__value">
+                {value}{unit && ` ${unit}`}
             </span>
             <input
                 type="range"

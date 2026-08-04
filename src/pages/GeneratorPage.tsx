@@ -29,6 +29,7 @@ export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
     const commitData = (value: string) => setParams(prev => ({ ...prev, data: value }))
     const updateSize = (value: number) => setParams(prev => ({ ...prev, size: value }))
     const updateMargin = (value: number) => setParams(prev => ({ ...prev, margin: value }))
+    const updateFormat = (value: string) => setParams(prev => ({ ...prev, format: value }))
 
     return (
         <div className="box">
@@ -40,6 +41,7 @@ export function GeneratorPage({ theme, toggleTheme }: GeneratorPageProps) {
                 src={src}
                 updateSize={updateSize}
                 updateMargin={updateMargin}
+                updateFormat={updateFormat}
             />
             <Content src={src} hasData={!!params.data} />
         </div>

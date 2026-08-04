@@ -11,9 +11,10 @@ interface SidebarProps {
     src: string | undefined
     updateSize: (value: number) => void
     updateMargin: (value: number) => void
+    updateFormat: (value: string) => void
 }
 
-export function Sidebar({ theme, toggleTheme, params,onSubmitData, src, updateSize, updateMargin }: SidebarProps) {
+export function Sidebar({ theme, toggleTheme, params, onSubmitData, src, updateSize, updateMargin, updateFormat }: SidebarProps) {
     const [draft, setDraft] = useState('')
 
     return (
@@ -50,6 +51,16 @@ export function Sidebar({ theme, toggleTheme, params,onSubmitData, src, updateSi
                 step={1}
                 onChange={updateMargin}
             />
+
+            <select
+                value={params.format}
+                onChange={e => updateFormat(e.target.value)}    
+            >
+                <option value="svg">svg</option>
+                <option value="png">png</option>
+                <option value="jpeg">jpeg</option>
+                <option value="webp">webp</option>
+            </select>
 
             {src && (
                 <a className="download-button" href={src} download={`qr.${params.format}`}>

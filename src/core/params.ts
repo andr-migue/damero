@@ -1,5 +1,4 @@
 type ErrorCorrection = 'L' | 'M' | 'Q' | 'H'
-type Format = 'svg' | 'png' | 'jpeg' | 'webp'
 type LogoKind = 'raster' | 'svg'
 
 type Logo = {
@@ -17,7 +16,7 @@ export type Params = {
     margin: number
     error: ErrorCorrection
     version?: number
-    format: Format
+    format: string
 }
 
 export const DEFAULTS = {
