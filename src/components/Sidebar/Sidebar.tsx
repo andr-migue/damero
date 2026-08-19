@@ -1,20 +1,18 @@
 import { useState } from 'react'
 import './Sidebar.css'
-import type { Params } from '../../core/params'
+import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
     toggleTheme: () => void
     params: Params
+    update: UpdateParam
     onSubmitData: (value: string) => void
     src: string | undefined
-    updateSize: (value: number) => void
-    updateMargin: (value: number) => void
-    updateFormat: (value: string) => void
 }
 
-export function Sidebar({ theme, toggleTheme, params, onSubmitData, src, updateSize, updateMargin, updateFormat }: SidebarProps) {
+export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src }: SidebarProps) {
     const [draft, setDraft] = useState('')
 
     return (
@@ -35,26 +33,28 @@ export function Sidebar({ theme, toggleTheme, params, onSubmitData, src, updateS
             </form>
 
             <SliderControl
-                label="size-slider"
+                label="Size"
                 value={params.size}
                 min={256}
                 max={1024}
                 step={1}
-                onChange={updateSize}
+                unit="px"
+                onChange={value => update('size', value)}
             />
 
             <SliderControl
-                label="margin-slider"
+                label="Margin"
                 value={params.margin}
                 min={16}
                 max={64}
                 step={1}
-                onChange={updateMargin}
+                unit="px"
+                onChange={value => update('margin', value)}
             />
 
             <select
                 value={params.format}
-                onChange={e => updateFormat(e.target.value)}    
+                onChange={e => update('format', e.target.value as Params['format'])}
             >
                 <option value="svg">svg</option>
                 <option value="png">png</option>

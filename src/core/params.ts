@@ -35,3 +35,5 @@ export function createParams(data: string): Params {
         ...DEFAULTS
     }
 }
+
+export type UpdateParam = <K extends keyof Params>(key: K, value: Params[K]) => void
