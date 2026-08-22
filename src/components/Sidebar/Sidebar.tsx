@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import './Sidebar.css'
 import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
 import { ColorControl } from '../controls/ColorControl/ColorControl'
+import { DataInput } from '../controls/DataInput/DataInput'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
@@ -15,24 +15,13 @@ interface SidebarProps {
 }
 
 export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src }: SidebarProps) {
-    const [draft, setDraft] = useState('')
-
     return (
         <aside className="sidebar">
             <button type="button" onClick={toggleTheme}>
                 {theme === 'light' ? 'Dark mode' : 'Light mode'}
             </button>
 
-            <form onSubmit={e => {
-                e.preventDefault()
-                onSubmitData(draft)
-            }}>
-                <input
-                    value={draft}
-                    onChange={e => setDraft(e.target.value)}
-                    placeholder="Type URL and press Enter"
-                />
-            </form>
+            <DataInput onSubmit={onSubmitData} />
 
             <SliderControl
                 label="Size"
