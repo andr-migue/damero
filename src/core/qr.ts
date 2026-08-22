@@ -10,13 +10,25 @@ export async function render(params: Params): Promise<Blob> {
             height: params.size,
             data: params.data,
             margin: params.margin,
+            shape: params.shape,
             image: logoUrl,
             imageOptions: {
                 imageSize: params.logoScale,
                 hideBackgroundDots: true,
-                margin: 2,
+                margin: params.imageMargin,
             },
-            dotsOptions: { color: params.fillColor },
+            dotsOptions: {
+                color: params.fillColor,
+                type: params.dotsType,
+            },
+            cornersSquareOptions: {
+                color: params.cornersSquareColor,
+                type: params.cornersSquareType,
+            },
+            cornersDotOptions: {
+                color: params.cornersDotColor,
+                type: params.cornersDotType,
+            },
             backgroundOptions: { color: params.backColor },
             qrOptions: {
                 errorCorrectionLevel: params.error,

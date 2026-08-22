@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react'
 import './ConfigPanel.css'
 import type { Params, UpdateParam } from '../../core/params'
+import {
+    DOT_TYPES,
+    CORNERS_SQUARE_TYPES,
+    CORNERS_DOT_TYPES,
+    SHAPE_TYPES,
+} from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
 import { ColorControl } from '../controls/ColorControl/ColorControl'
@@ -57,6 +63,17 @@ export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelPr
             />
 
             <SliderControl
+                label="Logo margin"
+                value={params.imageMargin}
+                min={0}
+                max={20}
+                step={1}
+                unit="px"
+                disabled={!params.logo}
+                onChange={v => update('imageMargin', v)}
+            />
+
+            <SliderControl
                 label="Margin"
                 value={params.margin}
                 min={32}
@@ -90,6 +107,18 @@ export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelPr
                 onChange={v => update('backColor', v)}
             />
 
+            <ColorControl
+                label="Corner square color"
+                value={params.cornersSquareColor}
+                onChange={v => update('cornersSquareColor', v)}
+            />
+
+            <ColorControl
+                label="Corner dot color"
+                value={params.cornersDotColor}
+                onChange={v => update('cornersDotColor', v)}
+            />
+
             <SelectControl
                 label="Error correction"
                 value={params.error}
@@ -100,6 +129,34 @@ export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelPr
                     { value: 'H', label: 'H — 30%' },
                 ]}
                 onChange={v => update('error', v as Params['error'])}
+            />
+
+            <SelectControl
+                label="Shape"
+                value={params.shape}
+                options={SHAPE_TYPES.map(v => ({ value: v, label: v }))}
+                onChange={v => update('shape', v as Params['shape'])}
+            />
+
+            <SelectControl
+                label="Dots style"
+                value={params.dotsType}
+                options={DOT_TYPES.map(v => ({ value: v, label: v }))}
+                onChange={v => update('dotsType', v as Params['dotsType'])}
+            />
+
+            <SelectControl
+                label="Corner square style"
+                value={params.cornersSquareType}
+                options={CORNERS_SQUARE_TYPES.map(v => ({ value: v, label: v }))}
+                onChange={v => update('cornersSquareType', v as Params['cornersSquareType'])}
+            />
+
+            <SelectControl
+                label="Corner dot style"
+                value={params.cornersDotType}
+                options={CORNERS_DOT_TYPES.map(v => ({ value: v, label: v }))}
+                onChange={v => update('cornersDotType', v as Params['cornersDotType'])}
             />
 
             <SelectControl
