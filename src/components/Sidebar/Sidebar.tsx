@@ -4,6 +4,7 @@ import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
 import { ColorControl } from '../controls/ColorControl/ColorControl'
 import { DataInput } from '../controls/DataInput/DataInput'
+import { LogoDropzone } from '../controls/LogoDropzone/LogoDropzone'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
@@ -22,6 +23,20 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
             </button>
 
             <DataInput onSubmit={onSubmitData} />
+
+            <LogoDropzone
+                value={params.logo}
+                onChange={v => update('logo', v)}
+            />
+
+            <SliderControl
+                label="Logo scale"
+                value={params.logoScale}
+                min={0.05}
+                max={0.30}
+                step={0.01}
+                onChange={v => update('logoScale', v)}
+            />
 
             <SliderControl
                 label="Size"

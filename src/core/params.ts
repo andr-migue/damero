@@ -1,7 +1,7 @@
 type ErrorCorrection = 'L' | 'M' | 'Q' | 'H'
-type LogoKind = 'raster' | 'svg'
+export type LogoKind = 'raster' | 'svg'
 
-type Logo = {
+export type Logo = {
     source: Blob
     kind: LogoKind
 }
