@@ -39,16 +39,6 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
             />
 
             <SliderControl
-                label="Size"
-                value={params.size}
-                min={256}
-                max={1024}
-                step={1}
-                unit="px"
-                onChange={value => update('size', value)}
-            />
-
-            <SliderControl
                 label="Margin"
                 value={params.margin}
                 min={16}

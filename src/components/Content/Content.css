@@ -1,3 +1,13 @@
 .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
     background-color: var(--color-surface-content);
+}
+
+.content img {
+    max-width: 480px;
+    width: 100%;
+    height: auto;
 }
