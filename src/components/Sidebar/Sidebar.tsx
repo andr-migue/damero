@@ -3,6 +3,7 @@ import './Sidebar.css'
 import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
+import { ColorControl } from '../controls/ColorControl/ColorControl'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
@@ -63,6 +64,18 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
                     { value: 'webp', label: 'WEBP' },
                 ]}
                 onChange={v => update('format', v as Params['format'])}
+            />
+
+            <ColorControl
+                label="Fill color"
+                value={params.fillColor}
+                onChange={v => update('fillColor', v)}
+            />
+
+            <ColorControl
+                label="Background color"
+                value={params.backColor}
+                onChange={v => update('backColor', v)}
             />
 
             <SelectControl
