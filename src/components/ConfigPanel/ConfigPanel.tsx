@@ -107,17 +107,34 @@ export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelPr
                 onChange={v => update('backColor', v)}
             />
 
-            <ColorControl
-                label="Corner square color"
-                value={params.cornersSquareColor}
-                onChange={v => update('cornersSquareColor', v)}
-            />
+            <details className="config-panel__advanced">
+                <summary>Advanced colors</summary>
 
-            <ColorControl
-                label="Corner dot color"
-                value={params.cornersDotColor}
-                onChange={v => update('cornersDotColor', v)}
-            />
+                <label className="config-panel__toggle">
+                    <input
+                        type="checkbox"
+                        checked={params.useCustomCornerColors}
+                        onChange={e => update('useCustomCornerColors', e.target.checked)}
+                    />
+                    Use custom corner colors
+                </label>
+
+                {params.useCustomCornerColors && (
+                    <>
+                        <ColorControl
+                            label="Corner square color"
+                            value={params.cornersSquareColor}
+                            onChange={v => update('cornersSquareColor', v)}
+                        />
+
+                        <ColorControl
+                            label="Corner dot color"
+                            value={params.cornersDotColor}
+                            onChange={v => update('cornersDotColor', v)}
+                        />
+                    </>
+                )}
+            </details>
 
             <SelectControl
                 label="Error correction"

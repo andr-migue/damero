@@ -20,6 +20,7 @@ export type Params = {
     imageMargin: number
     fillColor: string
     backColor: string
+    useCustomCornerColors: boolean
     cornersSquareColor: string
     cornersDotColor: string
     size: number
@@ -38,6 +39,7 @@ export const DEFAULTS = {
     imageMargin: 2,
     fillColor: '#000000',
     backColor: '#FFFFFF',
+    useCustomCornerColors: false,
     cornersSquareColor: '#000000',
     cornersDotColor: '#000000',
     size: 2048,

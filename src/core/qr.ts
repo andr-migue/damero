@@ -22,11 +22,11 @@ export async function render(params: Params): Promise<Blob> {
                 type: params.dotsType,
             },
             cornersSquareOptions: {
-                color: params.cornersSquareColor,
+                color: params.useCustomCornerColors ? params.cornersSquareColor : params.fillColor,
                 type: params.cornersSquareType,
             },
             cornersDotOptions: {
-                color: params.cornersDotColor,
+                color: params.useCustomCornerColors ? params.cornersDotColor : params.fillColor,
                 type: params.cornersDotType,
             },
             backgroundOptions: { color: params.backColor },

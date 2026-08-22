@@ -1,3 +1,32 @@
 .config-panel {
     background-color: var(--color-surface);
 }
+
+.config-panel__advanced {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+}
+
+.config-panel__advanced summary {
+    cursor: pointer;
+    color: var(--color-text-muted);
+    user-select: none;
+}
+
+.config-panel__advanced[open] summary {
+    margin-bottom: var(--space-xs);
+    color: var(--color-text);
+}
+
+.config-panel__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text);
+    cursor: pointer;
+}
