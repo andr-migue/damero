@@ -18,7 +18,10 @@ export async function render(params: Params): Promise<Blob> {
             },
             dotsOptions: { color: params.fillColor },
             backgroundOptions: { color: params.backColor },
-            qrOptions: { errorCorrectionLevel: params.error },
+            qrOptions: {
+                errorCorrectionLevel: params.error,
+                typeNumber: params.version as never,
+            },
         })
         return await qr.getRawData(params.format) as Blob
     } finally {

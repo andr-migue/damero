@@ -7,12 +7,13 @@ interface SliderControlProps {
     max: number
     step: number
     unit?: string
+    disabled?: boolean
     onChange: (value: number) => void
 }
 
-export function SliderControl({ label, value, min, max, step, unit, onChange }: SliderControlProps) {
+export function SliderControl({ label, value, min, max, step, unit, disabled, onChange }: SliderControlProps) {
     return (
-        <label className="slider-control">
+        <label className={`slider-control${disabled ? ' is-disabled' : ''}`}>
             <span className="slider-control__label">
                 {label}
             </span>
@@ -25,6 +26,7 @@ export function SliderControl({ label, value, min, max, step, unit, onChange }: 
                 max={max}
                 step={step}
                 value={value}
+                disabled={disabled}
                 onChange={e => onChange(Number(e.target.value))}
             />
         </label>

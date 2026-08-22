@@ -21,3 +21,9 @@
     width: 100%;
     accent-color: var(--color-accent);
 }
+
+.slider-control.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+

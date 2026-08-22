@@ -1,3 +1,13 @@
 .sidebar {
     background-color: var(--color-surface);
 }
+
+.sidebar__warning {
+    padding: var(--space-xs);
+    background: var(--color-accent-subtle);
+    color: var(--color-text);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+}

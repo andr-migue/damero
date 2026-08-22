@@ -35,6 +35,7 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
                 min={0.05}
                 max={0.30}
                 step={0.01}
+                disabled={!params.logo}
                 onChange={v => update('logoScale', v)}
             />
 
@@ -82,6 +83,25 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
                     { value: 'H', label: 'H — 30%' },
                 ]}
                 onChange={v => update('error', v as Params['error'])}
+            />
+
+            {params.logo && params.error !== 'H' && (
+                <p className="sidebar__warning">
+                    ⚠ El logo puede degradar la lectura. Se recomienda nivel H.
+                </p>
+            )}
+
+            <SelectControl
+                label="Version"
+                value={params.version === undefined ? '' : String(params.version)}
+                options={[
+                    { value: '', label: 'Auto' },
+                    ...Array.from({ length: 40 }, (_, i) => ({
+                        value: String(i + 1),
+                        label: `Version ${i + 1}`,
+                    })),
+                ]}
+                onChange={v => update('version', v === '' ? undefined : Number(v))}
             />
 
             {src && (
