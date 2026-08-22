@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react'
 import { GeneratorPage } from './pages/GeneratorPage'
+import { ThemeProvider } from './providers/ThemeProvider/ThemeProvider'
+import { ToastProvider } from './providers/ToastProvider/ToastProvider'
 
 export default function App() {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark')
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme)
-    }, [theme])
-
-    const toggleTheme = () => setTheme(t => t === 'light' ? 'dark' : 'light')
-
-    return <GeneratorPage theme={theme} toggleTheme={toggleTheme} />
+    return (
+        <ThemeProvider>
+            <ToastProvider>
+                <GeneratorPage />
+            </ToastProvider>
+        </ThemeProvider>
+    )
 }
