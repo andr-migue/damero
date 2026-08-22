@@ -23,7 +23,7 @@ export const DEFAULTS = {
   logoScale: 0.3,
   fillColor: '#000000',
   backColor: '#FFFFFF',
-  size: 1024,
+  size: 2048,
   margin: 32,
   error: 'H',
   format: 'png'
