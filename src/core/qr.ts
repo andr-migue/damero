@@ -20,7 +20,7 @@ export async function render(params: Params): Promise<Blob> {
             backgroundOptions: { color: params.backColor },
             qrOptions: {
                 errorCorrectionLevel: params.error,
-                typeNumber: params.version as never,
+                ...(params.version !== undefined && { typeNumber: params.version as never }),
             },
         })
         return await qr.getRawData(params.format) as Blob
