@@ -3,7 +3,7 @@ import { render } from "../core/qr"
 import { useEffect, useState } from "react"
 import type { Params, UpdateParam } from "../core/params"
 import './GeneratorPage.css'
-import { Sidebar } from "../components/Sidebar/Sidebar"
+import { ConfigPanel } from "../components/ConfigPanel/ConfigPanel"
 import { Content } from "../components/Content/Content"
 import { useObjectURL } from "../hooks/useObjectURL"
 
@@ -28,7 +28,7 @@ export function GeneratorPage() {
 
     return (
         <div className="box">
-            <Sidebar
+            <ConfigPanel
                 params={params}
                 update={update}
                 onSubmitData={commitData}

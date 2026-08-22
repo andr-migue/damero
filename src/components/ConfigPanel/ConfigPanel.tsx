@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import './Sidebar.css'
+import './ConfigPanel.css'
 import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
@@ -9,14 +9,14 @@ import { LogoDropzone } from '../controls/LogoDropzone/LogoDropzone'
 import { useTheme } from '../../providers/ThemeProvider/ThemeProvider'
 import { useToast } from '../../providers/ToastProvider/ToastProvider'
 
-interface SidebarProps {
+interface ConfigPanelProps {
     params: Params
     update: UpdateParam
     onSubmitData: (value: string) => void
     src: string | undefined
 }
 
-export function Sidebar({ params, update, onSubmitData, src }: SidebarProps) {
+export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelProps) {
     const { theme, toggleTheme } = useTheme()
     const { show } = useToast()
 
@@ -32,8 +32,9 @@ export function Sidebar({ params, update, onSubmitData, src }: SidebarProps) {
         prevError.current = params.error
         prevLogo.current = params.logo
     }, [isRisky, params.error, params.logo, show])
+
     return (
-        <aside className="sidebar">
+        <aside className="config-panel">
             <button type="button" onClick={toggleTheme}>
                 {theme === 'light' ? 'Dark mode' : 'Light mode'}
             </button>
@@ -58,8 +59,8 @@ export function Sidebar({ params, update, onSubmitData, src }: SidebarProps) {
             <SliderControl
                 label="Margin"
                 value={params.margin}
-                min={16}
-                max={64}
+                min={32}
+                max={128}
                 step={1}
                 unit="px"
                 onChange={value => update('margin', value)}

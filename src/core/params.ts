@@ -24,7 +24,7 @@ export const DEFAULTS = {
   fillColor: '#000000',
   backColor: '#FFFFFF',
   size: 2048,
-  margin: 32,
+  margin: 64,
   error: 'H',
   format: 'png'
 } as const
