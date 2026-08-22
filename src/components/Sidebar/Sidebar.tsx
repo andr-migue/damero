@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import './Sidebar.css'
 import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
@@ -5,17 +6,32 @@ import { SelectControl } from '../controls/SelectControl/SelectControl'
 import { ColorControl } from '../controls/ColorControl/ColorControl'
 import { DataInput } from '../controls/DataInput/DataInput'
 import { LogoDropzone } from '../controls/LogoDropzone/LogoDropzone'
+import { useTheme } from '../../providers/ThemeProvider/ThemeProvider'
+import { useToast } from '../../providers/ToastProvider/ToastProvider'
 
 interface SidebarProps {
-    theme: 'light' | 'dark'
-    toggleTheme: () => void
     params: Params
     update: UpdateParam
     onSubmitData: (value: string) => void
     src: string | undefined
 }
 
-export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src }: SidebarProps) {
+export function Sidebar({ params, update, onSubmitData, src }: SidebarProps) {
+    const { theme, toggleTheme } = useTheme()
+    const { show } = useToast()
+
+    const isRisky = !!params.logo && params.error !== 'H'
+    const prevError = useRef(params.error)
+    const prevLogo = useRef(params.logo)
+    useEffect(() => {
+        const errorChanged = prevError.current !== params.error
+        const logoChanged = prevLogo.current !== params.logo
+        if (isRisky && (errorChanged || logoChanged)) {
+            show('El logo puede degradar la lectura. Se recomienda nivel H.', 'warning')
+        }
+        prevError.current = params.error
+        prevLogo.current = params.logo
+    }, [isRisky, params.error, params.logo, show])
     return (
         <aside className="sidebar">
             <button type="button" onClick={toggleTheme}>
@@ -84,12 +100,6 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
                 ]}
                 onChange={v => update('error', v as Params['error'])}
             />
-
-            {params.logo && params.error !== 'H' && (
-                <p className="sidebar__warning">
-                    ⚠ El logo puede degradar la lectura. Se recomienda nivel H.
-                </p>
-            )}
 
             <SelectControl
                 label="Version"

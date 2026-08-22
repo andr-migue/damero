@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import type { Logo } from '../../../core/params'
 import { useObjectURL } from '../../../hooks/useObjectURL'
+import { useToast } from '../../../providers/ToastProvider/ToastProvider'
 import './LogoDropzone.css'
 
 const ACCEPTED_MIME = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml']
@@ -22,12 +23,17 @@ export function LogoDropzone({ value, onChange }: LogoDropzoneProps) {
     const [isDragging, setIsDragging] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const previewUrl = useObjectURL(value?.source)
+    const { show } = useToast()
 
     const handleFiles = (files: FileList | null) => {
         const file = files?.[0]
         if (!file) return
         const logo = toLogo(file)
-        if (logo) onChange(logo)
+        if (logo) {
+            onChange(logo)
+        } else {
+            show(`"${file.name}" no es un formato admitido (PNG, JPEG, WebP, SVG).`, 'error')
+        }
     }
 
     return (
