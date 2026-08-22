@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Sidebar.css'
 import type { Params, UpdateParam } from '../../core/params'
 import { SliderControl } from '../controls/SliderControl/SliderControl'
+import { SelectControl } from '../controls/SelectControl/SelectControl'
 
 interface SidebarProps {
     theme: 'light' | 'dark'
@@ -52,15 +53,29 @@ export function Sidebar({ theme, toggleTheme, params, update, onSubmitData, src 
                 onChange={value => update('margin', value)}
             />
 
-            <select
+            <SelectControl
+                label="Format"
                 value={params.format}
-                onChange={e => update('format', e.target.value as Params['format'])}
-            >
-                <option value="svg">svg</option>
-                <option value="png">png</option>
-                <option value="jpeg">jpeg</option>
-                <option value="webp">webp</option>
-            </select>
+                options={[
+                    { value: 'svg', label: 'SVG' },
+                    { value: 'png', label: 'PNG' },
+                    { value: 'jpeg', label: 'JPEG' },
+                    { value: 'webp', label: 'WEBP' },
+                ]}
+                onChange={v => update('format', v as Params['format'])}
+            />
+
+            <SelectControl
+                label="Error correction"
+                value={params.error}
+                options={[
+                    { value: 'L', label: 'L — 7%' },
+                    { value: 'M', label: 'M — 15%' },
+                    { value: 'Q', label: 'Q — 25%' },
+                    { value: 'H', label: 'H — 30%' },
+                ]}
+                onChange={v => update('error', v as Params['error'])}
+            />
 
             {src && (
                 <a className="download-button" href={src} download={`qr.${params.format}`}>
