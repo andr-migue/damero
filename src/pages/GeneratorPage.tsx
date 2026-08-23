@@ -33,7 +33,11 @@ export function GeneratorPage() {
                 update={update}
                 onSubmitData={commitData}
             />
-            <Content src={src} hasData={!!params.data} format={params.format} />
+            <Content 
+                src={src} 
+                hasData={!!params.data} 
+                format={params.format} 
+            />
         </div>
     )
 }

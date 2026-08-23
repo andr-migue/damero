@@ -1,4 +1,4 @@
-import QRCodeStyling from "qr-code-styling"
+import QRCodeStyling, { type FileExtension } from "qr-code-styling"
 import type { Params } from "./params"
 
 export async function render(params: Params): Promise<Blob> {
@@ -35,7 +35,7 @@ export async function render(params: Params): Promise<Blob> {
                 ...(params.version !== undefined && { typeNumber: params.version as never }),
             },
         })
-        return await qr.getRawData(params.format) as Blob
+        return await qr.getRawData(params.format as FileExtension) as Blob
     } finally {
         if (logoUrl) URL.revokeObjectURL(logoUrl)
     }
