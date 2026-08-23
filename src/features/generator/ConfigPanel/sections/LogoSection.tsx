@@ -40,7 +40,7 @@ export function LogoSection({ params, update }: LogoSectionProps) {
                 label="Margin"
                 value={params.logoMargin}
                 min={0}
-                max={20}
+                max={50}
                 step={1}
                 unit="px"
                 disabled={!params.logo}
