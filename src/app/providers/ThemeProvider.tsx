@@ -3,10 +3,26 @@ import type { ReactNode } from 'react'
 import { ThemeContext, STORAGE_KEY } from './theme'
 import type { Theme } from './theme'
 
+function storedTheme(): Theme | null {
+    try {
+        const value = localStorage.getItem(STORAGE_KEY)
+        return value === 'light' || value === 'dark' ? value : null
+    } catch {
+        return null
+    }
+}
+
+function persistTheme(theme: Theme) {
+    try {
+        localStorage.setItem(STORAGE_KEY, theme)
+    } catch {
+        return
+    }
+}
+
 function initialTheme(): Theme {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark') return stored
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    return storedTheme()
+        ?? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -14,7 +30,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         document.documentElement.dataset.theme = theme
-        localStorage.setItem(STORAGE_KEY, theme)
+        persistTheme(theme)
     }, [theme])
 
     const toggleTheme = () => setTheme(t => (t === 'light' ? 'dark' : 'light'))

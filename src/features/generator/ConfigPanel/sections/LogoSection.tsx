@@ -25,7 +25,10 @@ export function LogoSection({ params, update }: LogoSectionProps) {
                     kind: file.type === 'image/svg+xml' ? 'svg' : 'raster',
                 })}
                 onClear={() => update('logo', undefined)}
-                onReject={file => show(`"${file.name}" is not a supported image.`, 'error')}
+                onReject={file => show(
+                    `"${file.name}" is not a supported image. Use PNG, JPEG, WebP or SVG.`,
+                    'error',
+                )}
             />
             <Slider
                 label="Scale"

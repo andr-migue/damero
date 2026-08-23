@@ -4,12 +4,13 @@ import './Preview.css'
 
 interface PreviewProps {
     src: string | undefined
+    error: string | undefined
     format: Format
     size: number
     quietZone: number
 }
 
-export function Preview({ src, format, size, quietZone }: PreviewProps) {
+export function Preview({ src, error, format, size, quietZone }: PreviewProps) {
     const markLength = `max(16px, ${(quietZone / size) * 100}%)`
 
     return (
@@ -27,6 +28,8 @@ export function Preview({ src, format, size, quietZone }: PreviewProps) {
                             Download {format.toUpperCase()}
                         </a>
                     </>
+                ) : error ? (
+                    <p className="preview__empty preview__empty--error">{error}</p>
                 ) : (
                     <p className="preview__empty">No code yet. Fill a form to generate one.</p>
                 )}

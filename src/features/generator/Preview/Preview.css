@@ -69,6 +69,13 @@
     text-align: center;
 }
 
+.preview__empty--error {
+    border-style: solid;
+    border-color: var(--color-danger);
+    color: var(--color-text);
+    text-align: left;
+}
+
 .preview__download {
     width: 100%;
     padding: var(--control-padding-y) var(--space-sm);

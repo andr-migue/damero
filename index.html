@@ -7,7 +7,12 @@
     <title>Damero — QR code generator</title>
     <script>
       (() => {
-        const stored = localStorage.getItem('damero:theme')
+        let stored = null
+        try {
+          stored = localStorage.getItem('damero:theme')
+        } catch {
+          stored = null
+        }
         document.documentElement.dataset.theme =
           stored === 'light' || stored === 'dark'
             ? stored
