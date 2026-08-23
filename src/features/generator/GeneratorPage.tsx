@@ -30,7 +30,12 @@ export function GeneratorPage() {
     return (
         <main className="generator">
             <ConfigPanel params={params} update={update} />
-            <Preview src={src} format={params.format} />
+            <Preview
+                src={src}
+                format={params.format}
+                size={params.size}
+                quietZone={params.margin}
+            />
         </main>
     )
 }

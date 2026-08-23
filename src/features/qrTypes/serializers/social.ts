@@ -1,31 +1,67 @@
+export interface Platform {
+    id: string
+    label: string
+    icon: string
+    field: string
+    placeholder: string
+    url: (handle: string) => string
+}
+
 export const PLATFORMS = [
-    { id: 'instagram', label: 'Instagram',   icon: 'instagram', url: (u: string) => `https://instagram.com/${u}` },
-    { id: 'twitter',   label: 'Twitter / X', icon: 'twitter',   url: (u: string) => `https://x.com/${u}` },
-    { id: 'tiktok',    label: 'TikTok',      icon: 'tiktok',    url: (u: string) => `https://tiktok.com/@${u}` },
-    { id: 'youtube',   label: 'YouTube',     icon: 'youtube',   url: (u: string) => `https://youtube.com/@${u}` },
-    { id: 'facebook',  label: 'Facebook',    icon: 'facebook',  url: (u: string) => `https://facebook.com/${u}` },
-    { id: 'linkedin',  label: 'LinkedIn',    icon: 'linkedin',  url: (u: string) => `https://linkedin.com/in/${u}` },
-    { id: 'telegram',  label: 'Telegram',    icon: 'telegram',  url: (u: string) => `https://t.me/${u}` },
-    { id: 'twitch',    label: 'Twitch',      icon: 'twitch',    url: (u: string) => `https://twitch.tv/${u}` },
-    { id: 'github',    label: 'GitHub',      icon: 'github',    url: (u: string) => `https://github.com/${u}` },
-    { id: 'discord',   label: 'Discord',     icon: 'discord',   url: (u: string) => `https://discord.gg/${u}` },
-] as const
+    {
+        id: 'instagram', label: 'Instagram', icon: 'brand/instagram',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://instagram.com/${h}`,
+    },
+    {
+        id: 'twitter', label: 'X', icon: 'brand-mono/twitter',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://x.com/${h}`,
+    },
+    {
+        id: 'tiktok', label: 'TikTok', icon: 'brand-mono/tiktok',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://tiktok.com/@${h}`,
+    },
+    {
+        id: 'youtube', label: 'YouTube', icon: 'brand/youtube',
+        field: 'Handle', placeholder: 'handle',
+        url: h => `https://youtube.com/@${h}`,
+    },
+    {
+        id: 'facebook', label: 'Facebook', icon: 'brand/facebook',
+        field: 'Username or page', placeholder: 'username',
+        url: h => `https://facebook.com/${h}`,
+    },
+    {
+        id: 'linkedin', label: 'LinkedIn', icon: 'brand/linkedin',
+        field: 'Profile slug', placeholder: 'your-name',
+        url: h => `https://linkedin.com/in/${h}`,
+    },
+    {
+        id: 'telegram', label: 'Telegram', icon: 'brand/telegram',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://t.me/${h}`,
+    },
+    {
+        id: 'twitch', label: 'Twitch', icon: 'brand/twitch',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://twitch.tv/${h}`,
+    },
+    {
+        id: 'github', label: 'GitHub', icon: 'brand-mono/github',
+        field: 'Username', placeholder: 'username',
+        url: h => `https://github.com/${h}`,
+    },
+    {
+        id: 'discord', label: 'Discord', icon: 'brand/discord',
+        field: 'Invite code', placeholder: 'abc123',
+        url: h => `https://discord.gg/${h}`,
+    },
+] as const satisfies readonly Platform[]
 
-export type PlatformId = typeof PLATFORMS[number]['id']
-
-export function findPlatform(id: PlatformId) {
-    return PLATFORMS.find(p => p.id === id)!
-}
-
-export const socialDefaults = {
-    platform: 'instagram' as PlatformId,
-    username: '',
-}
-
-export type SocialValues = typeof socialDefaults
-
-export function serializeSocial({ platform, username }: SocialValues): string {
-    return findPlatform(platform).url(username.trim().replace(/^@/, ''))
+export function serializeProfile(platform: Platform, handle: string): string {
+    return platform.url(handle.trim().replace(/^@/, ''))
 }
 
 export const whatsappDefaults = { phone: '', message: '' }

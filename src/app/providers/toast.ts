@@ -1,6 +1,6 @@
 import { createContext, use } from 'react'
 
-export type ToastKind = 'info' | 'success' | 'warning' | 'error'
+export type ToastKind = 'warning' | 'error'
 
 export interface Toast {
     id: number

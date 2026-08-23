@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CATEGORIES } from './types'
 import type { CategoryId } from './types'
 import { QR_TYPES, findType, typesOf } from './registry'
-import { iconUrl } from '../../lib/icons'
+import { Icon } from '../../ui'
 import type { Logo } from '../../core/params'
 import './TypePicker.css'
 
@@ -56,7 +56,7 @@ export function TypePicker({ onSerialize, onLogo }: TypePickerProps) {
                         className="type-picker__type"
                         onClick={() => selectType(t.id)}
                     >
-                        <img className="type-picker__icon" src={iconUrl(t.icon)} alt="" />
+                        <Icon slug={t.icon} />
                         {t.label}
                     </button>
                 ))}

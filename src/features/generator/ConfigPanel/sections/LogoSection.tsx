@@ -19,6 +19,7 @@ export function LogoSection({ params, update }: LogoSectionProps) {
                 label="Image"
                 accept={ACCEPTED}
                 file={params.logo?.source}
+                previewBackground={params.backColor}
                 onSelect={file => update('logo', {
                     source: file,
                     kind: file.type === 'image/svg+xml' ? 'svg' : 'raster',

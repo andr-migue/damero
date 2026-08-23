@@ -2,6 +2,8 @@ import { createContext, use } from 'react'
 
 export type Theme = 'light' | 'dark'
 
+export const STORAGE_KEY = 'damero:theme'
+
 export interface ThemeContextValue {
     theme: Theme
     toggleTheme: () => void

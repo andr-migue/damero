@@ -6,6 +6,7 @@ interface DropzoneProps {
     accept: readonly string[]
     file: Blob | undefined
     hint?: string
+    previewBackground?: string
     onSelect: (file: File) => void
     onClear: () => void
     onReject?: (file: File) => void
@@ -13,7 +14,7 @@ interface DropzoneProps {
 
 export function Dropzone({
     label, accept, file, hint = 'Drop an image or click to select',
-    onSelect, onClear, onReject,
+    previewBackground, onSelect, onClear, onReject,
 }: DropzoneProps) {
     const [dragging, setDragging] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -43,7 +44,12 @@ export function Dropzone({
             >
                 {preview ? (
                     <>
-                        <img className="dropzone__preview" src={preview} alt="" />
+                        <img
+                            className="dropzone__preview"
+                            style={{ background: previewBackground }}
+                            src={preview}
+                            alt=""
+                        />
                         <button
                             type="button"
                             className="dropzone__clear"
