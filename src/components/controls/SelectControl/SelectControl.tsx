@@ -1,5 +1,3 @@
-import './SelectControl.css'
-
 interface Option {
     value: string
     label: string
@@ -14,10 +12,10 @@ interface SelectControlProps {
 
 export function SelectControl({ label, value, options, onChange }: SelectControlProps) {
     return (
-        <label className="select-control">
-            <span className="select-control__label">{label}</span>
+        <label className="control">
+            <span className="control__label">{label}</span>
             <select
-                className="select-control__select"
+                className="control__select"
                 value={value}
                 onChange={e => onChange(e.target.value)}
             >

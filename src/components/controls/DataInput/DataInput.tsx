@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './DataInput.css'
 
 interface DataInputProps {
     label?: string
@@ -7,21 +6,24 @@ interface DataInputProps {
     onSubmit: (value: string) => void
 }
 
-export function DataInput({ label = 'Data', placeholder = 'Type URL and press Enter', onSubmit, }: DataInputProps) {
+export function DataInput({
+    label = 'Data',
+    placeholder = 'Type URL and press Enter',
+    onSubmit,
+}: DataInputProps) {
     const [draft, setDraft] = useState('')
 
     return (
         <form
-            className="data-input"
             onSubmit={e => {
                 e.preventDefault()
                 onSubmit(draft)
             }}
         >
-            <label className="data-input__label">
-                <span>{label}</span>
+            <label className="control">
+                <span className="control__label">{label}</span>
                 <input
-                    className="data-input__input"
+                    className="control__input"
                     value={draft}
                     onChange={e => setDraft(e.target.value)}
                     placeholder={placeholder}

@@ -19,10 +19,23 @@ interface ConfigPanelProps {
     params: Params
     update: UpdateParam
     onSubmitData: (value: string) => void
-    src: string | undefined
 }
 
-export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelProps) {
+interface SectionProps {
+    title: string
+    children: React.ReactNode
+}
+
+function Section({ title, children }: SectionProps) {
+    return (
+        <section className="config-panel__section">
+            <h3 className="config-panel__section-title">{title}</h3>
+            <div className="config-panel__section-body">{children}</div>
+        </section>
+    )
+}
+
+export function ConfigPanel({ params, update, onSubmitData }: ConfigPanelProps) {
     const { theme, toggleTheme } = useTheme()
     const { show } = useToast()
 
@@ -40,160 +53,162 @@ export function ConfigPanel({ params, update, onSubmitData, src }: ConfigPanelPr
     }, [isRisky, params.error, params.logo, show])
 
     return (
-        <aside className="config-panel">
-            <button type="button" onClick={toggleTheme}>
-                {theme === 'light' ? 'Dark mode' : 'Light mode'}
-            </button>
+        <section className="config-panel" style={{ gridArea: 'config' }}>
+            <header className="config-panel__header">
+                <h2 className="config-panel__title">Damero</h2>
+                <button
+                    type="button"
+                    className="config-panel__theme-toggle"
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                >
+                    {theme === 'light' ? '🌙' : '☀'}
+                </button>
+            </header>
 
-            <DataInput onSubmit={onSubmitData} />
+            <div className="config-panel__body">
+                <Section title="Data">
+                    <DataInput onSubmit={onSubmitData} />
+                </Section>
 
-            <LogoDropzone
-                value={params.logo}
-                onChange={v => update('logo', v)}
-            />
-
-            <SliderControl
-                label="Logo scale"
-                value={params.logoScale}
-                min={0.05}
-                max={0.30}
-                step={0.01}
-                disabled={!params.logo}
-                onChange={v => update('logoScale', v)}
-            />
-
-            <SliderControl
-                label="Logo margin"
-                value={params.imageMargin}
-                min={0}
-                max={20}
-                step={1}
-                unit="px"
-                disabled={!params.logo}
-                onChange={v => update('imageMargin', v)}
-            />
-
-            <SliderControl
-                label="Margin"
-                value={params.margin}
-                min={32}
-                max={128}
-                step={1}
-                unit="px"
-                onChange={value => update('margin', value)}
-            />
-
-            <SelectControl
-                label="Format"
-                value={params.format}
-                options={[
-                    { value: 'svg', label: 'SVG' },
-                    { value: 'png', label: 'PNG' },
-                    { value: 'jpeg', label: 'JPEG' },
-                    { value: 'webp', label: 'WEBP' },
-                ]}
-                onChange={v => update('format', v as Params['format'])}
-            />
-
-            <ColorControl
-                label="Fill color"
-                value={params.fillColor}
-                onChange={v => update('fillColor', v)}
-            />
-
-            <ColorControl
-                label="Background color"
-                value={params.backColor}
-                onChange={v => update('backColor', v)}
-            />
-
-            <details className="config-panel__advanced">
-                <summary>Advanced colors</summary>
-
-                <label className="config-panel__toggle">
-                    <input
-                        type="checkbox"
-                        checked={params.useCustomCornerColors}
-                        onChange={e => update('useCustomCornerColors', e.target.checked)}
+                <Section title="Logo">
+                    <LogoDropzone
+                        value={params.logo}
+                        onChange={v => update('logo', v)}
                     />
-                    Use custom corner colors
-                </label>
+                    <SliderControl
+                        label="Logo scale"
+                        value={params.logoScale}
+                        min={0.05}
+                        max={0.30}
+                        step={0.01}
+                        disabled={!params.logo}
+                        onChange={v => update('logoScale', v)}
+                    />
+                    <SliderControl
+                        label="Logo margin"
+                        value={params.imageMargin}
+                        min={0}
+                        max={20}
+                        step={1}
+                        unit="px"
+                        disabled={!params.logo}
+                        onChange={v => update('imageMargin', v)}
+                    />
+                </Section>
 
-                {params.useCustomCornerColors && (
-                    <>
-                        <ColorControl
-                            label="Corner square color"
-                            value={params.cornersSquareColor}
-                            onChange={v => update('cornersSquareColor', v)}
-                        />
+                <Section title="Colors">
+                    <ColorControl
+                        label="Fill"
+                        value={params.fillColor}
+                        onChange={v => update('fillColor', v)}
+                    />
+                    <ColorControl
+                        label="Background"
+                        value={params.backColor}
+                        onChange={v => update('backColor', v)}
+                    />
+                    <details className="config-panel__advanced">
+                        <summary>Advanced colors</summary>
+                        <label className="config-panel__toggle">
+                            <input
+                                type="checkbox"
+                                checked={params.useCustomCornerColors}
+                                onChange={e => update('useCustomCornerColors', e.target.checked)}
+                            />
+                            Use custom corner colors
+                        </label>
+                        {params.useCustomCornerColors && (
+                            <>
+                                <ColorControl
+                                    label="Corner square"
+                                    value={params.cornersSquareColor}
+                                    onChange={v => update('cornersSquareColor', v)}
+                                />
+                                <ColorControl
+                                    label="Corner dot"
+                                    value={params.cornersDotColor}
+                                    onChange={v => update('cornersDotColor', v)}
+                                />
+                            </>
+                        )}
+                    </details>
+                </Section>
 
-                        <ColorControl
-                            label="Corner dot color"
-                            value={params.cornersDotColor}
-                            onChange={v => update('cornersDotColor', v)}
-                        />
-                    </>
-                )}
-            </details>
+                <Section title="Style">
+                    <SelectControl
+                        label="Shape"
+                        value={params.shape}
+                        options={SHAPE_TYPES.map(v => ({ value: v, label: v }))}
+                        onChange={v => update('shape', v as Params['shape'])}
+                    />
+                    <SelectControl
+                        label="Dots style"
+                        value={params.dotsType}
+                        options={DOT_TYPES.map(v => ({ value: v, label: v }))}
+                        onChange={v => update('dotsType', v as Params['dotsType'])}
+                    />
+                    <SelectControl
+                        label="Corner square style"
+                        value={params.cornersSquareType}
+                        options={CORNERS_SQUARE_TYPES.map(v => ({ value: v, label: v }))}
+                        onChange={v => update('cornersSquareType', v as Params['cornersSquareType'])}
+                    />
+                    <SelectControl
+                        label="Corner dot style"
+                        value={params.cornersDotType}
+                        options={CORNERS_DOT_TYPES.map(v => ({ value: v, label: v }))}
+                        onChange={v => update('cornersDotType', v as Params['cornersDotType'])}
+                    />
+                    <SliderControl
+                        label="Margin"
+                        value={params.margin}
+                        min={32}
+                        max={128}
+                        step={1}
+                        unit="px"
+                        onChange={value => update('margin', value)}
+                    />
+                </Section>
 
-            <SelectControl
-                label="Error correction"
-                value={params.error}
-                options={[
-                    { value: 'L', label: 'L — 7%' },
-                    { value: 'M', label: 'M — 15%' },
-                    { value: 'Q', label: 'Q — 25%' },
-                    { value: 'H', label: 'H — 30%' },
-                ]}
-                onChange={v => update('error', v as Params['error'])}
-            />
+                <Section title="QR options">
+                    <SelectControl
+                        label="Error correction"
+                        value={params.error}
+                        options={[
+                            { value: 'L', label: 'L — 7%' },
+                            { value: 'M', label: 'M — 15%' },
+                            { value: 'Q', label: 'Q — 25%' },
+                            { value: 'H', label: 'H — 30%' },
+                        ]}
+                        onChange={v => update('error', v as Params['error'])}
+                    />
+                    <SelectControl
+                        label="Version"
+                        value={params.version === undefined ? '' : String(params.version)}
+                        options={[
+                            { value: '', label: 'Auto' },
+                            ...Array.from({ length: 40 }, (_, i) => ({
+                                value: String(i + 1),
+                                label: `Version ${i + 1}`,
+                            })),
+                        ]}
+                        onChange={v => update('version', v === '' ? undefined : Number(v))}
+                    />
+                    <SelectControl
+                        label="Format"
+                        value={params.format}
+                        options={[
+                            { value: 'svg', label: 'SVG' },
+                            { value: 'png', label: 'PNG' },
+                            { value: 'jpeg', label: 'JPEG' },
+                            { value: 'webp', label: 'WEBP' },
+                        ]}
+                        onChange={v => update('format', v as Params['format'])}
+                    />
+                </Section>
+            </div>
 
-            <SelectControl
-                label="Shape"
-                value={params.shape}
-                options={SHAPE_TYPES.map(v => ({ value: v, label: v }))}
-                onChange={v => update('shape', v as Params['shape'])}
-            />
-
-            <SelectControl
-                label="Dots style"
-                value={params.dotsType}
-                options={DOT_TYPES.map(v => ({ value: v, label: v }))}
-                onChange={v => update('dotsType', v as Params['dotsType'])}
-            />
-
-            <SelectControl
-                label="Corner square style"
-                value={params.cornersSquareType}
-                options={CORNERS_SQUARE_TYPES.map(v => ({ value: v, label: v }))}
-                onChange={v => update('cornersSquareType', v as Params['cornersSquareType'])}
-            />
-
-            <SelectControl
-                label="Corner dot style"
-                value={params.cornersDotType}
-                options={CORNERS_DOT_TYPES.map(v => ({ value: v, label: v }))}
-                onChange={v => update('cornersDotType', v as Params['cornersDotType'])}
-            />
-
-            <SelectControl
-                label="Version"
-                value={params.version === undefined ? '' : String(params.version)}
-                options={[
-                    { value: '', label: 'Auto' },
-                    ...Array.from({ length: 40 }, (_, i) => ({
-                        value: String(i + 1),
-                        label: `Version ${i + 1}`,
-                    })),
-                ]}
-                onChange={v => update('version', v === '' ? undefined : Number(v))}
-            />
-
-            {src && (
-                <a className="download-button" href={src} download={`qr.${params.format}`}>
-                    Descargar {params.format.toUpperCase()}
-                </a>
-            )}
-        </aside>
+        </section>
     )
 }

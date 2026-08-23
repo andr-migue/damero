@@ -1,5 +1,16 @@
 .box {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    grid-template-areas: "config preview";
+    min-height: 100dvh;
+    background: var(--color-bg);
+}
+
+@media (max-width: 900px) {
+    .box {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "preview"
+            "config";
+    }
 }

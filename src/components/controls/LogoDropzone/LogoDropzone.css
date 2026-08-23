@@ -1,23 +1,19 @@
-.logo-dropzone {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    font-size: var(--font-size-sm);
-    color: var(--color-text);
-}
-
 .logo-dropzone__area {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 96px;
+    min-height: 120px;
     padding: var(--space-sm);
-    background: var(--color-surface);
-    border: 2px dashed var(--color-border);
-    border-radius: 4px;
+    background: var(--control-bg);
+    border: 2px dashed var(--control-border);
+    border-radius: var(--control-radius);
     cursor: pointer;
     transition: border-color 0.15s, background 0.15s;
+}
+
+.logo-dropzone__area:hover {
+    border-color: var(--color-border-strong);
 }
 
 .logo-dropzone__area.is-dragging {
@@ -28,21 +24,21 @@
 .logo-dropzone__hint {
     color: var(--color-text-muted);
     text-align: center;
+    font-size: var(--font-size-sm);
 }
 
 .logo-dropzone__preview {
     max-width: 100%;
-    max-height: 80px;
+    max-height: 100px;
     object-fit: contain;
-    image-rendering: auto;
 }
 
 .logo-dropzone__remove {
     position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 24px;
-    height: 24px;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,11 +47,14 @@
     border: 1px solid var(--color-border);
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1;
+    box-shadow: var(--shadow-sm);
+    transition: background 0.15s, color 0.15s;
 }
 
 .logo-dropzone__remove:hover {
     background: var(--color-accent);
     color: var(--color-neutral-0);
+    border-color: transparent;
 }

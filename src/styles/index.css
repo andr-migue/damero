@@ -1,3 +1,4 @@
 @import './reset.css';
+@import './colors.css';
 @import './tokens.css';
-@import './colors.css'
+@import './controls.css';

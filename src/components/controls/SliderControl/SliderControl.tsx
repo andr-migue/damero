@@ -1,5 +1,3 @@
-import './SliderControl.css'
-
 interface SliderControlProps {
     label: string
     value: number
@@ -13,14 +11,15 @@ interface SliderControlProps {
 
 export function SliderControl({ label, value, min, max, step, unit, disabled, onChange }: SliderControlProps) {
     return (
-        <label className={`slider-control${disabled ? ' is-disabled' : ''}`}>
-            <span className="slider-control__label">
+        <label className={`control${disabled ? ' is-disabled' : ''}`}>
+            <span className="control__label">
                 {label}
-            </span>
-            <span className="slider-control__value">
-                {value}{unit && ` ${unit}`}
+                <span className="control__hint">
+                    {unit ? `${value} ${unit}` : value}
+                </span>
             </span>
             <input
+                className="control__range"
                 type="range"
                 min={min}
                 max={max}

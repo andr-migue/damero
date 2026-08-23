@@ -1,10 +1,19 @@
 .qr-preview__img {
-    max-width: 480px;
+    max-width: min(560px, 100%);
     width: 100%;
     height: auto;
+    background: var(--color-neutral-0);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
 .qr-preview__placeholder {
+    max-width: 320px;
+    padding: var(--space-lg);
     color: var(--color-text-muted);
     text-align: center;
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
 }

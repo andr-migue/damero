@@ -1,0 +1,72 @@
+/* Base compartida para todos los controles del ConfigPanel */
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.control__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 500;
+}
+
+.control__hint {
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+}
+
+/* Inputs de texto, select y similares comparten look */
+.control__input,
+.control__select {
+    padding: var(--control-padding-y) var(--control-padding-x);
+    background: var(--control-bg);
+    color: var(--color-text);
+    border: 1px solid var(--control-border);
+    border-radius: var(--control-radius);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.control__input:focus,
+.control__select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: var(--control-focus-ring);
+}
+
+.control__input:hover,
+.control__select:hover {
+    border-color: var(--color-border-strong);
+}
+
+/* Range slider */
+.control__range {
+    width: 100%;
+    accent-color: var(--color-accent);
+}
+
+/* Color picker */
+.control__color {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    background: var(--control-bg);
+    border: 1px solid var(--control-border);
+    border-radius: var(--control-radius);
+    cursor: pointer;
+}
+
+.control__color::-webkit-color-swatch-wrapper { padding: 4px; }
+.control__color::-webkit-color-swatch { border: none; border-radius: 2px; }
+
+/* Estado disabled */
+.control.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

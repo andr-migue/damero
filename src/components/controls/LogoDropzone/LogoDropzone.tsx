@@ -37,8 +37,8 @@ export function LogoDropzone({ value, onChange }: LogoDropzoneProps) {
     }
 
     return (
-        <div className="logo-dropzone">
-            <span className="logo-dropzone__label">Logo</span>
+        <div className="control">
+            <span className="control__label">Logo</span>
 
             <div
                 className={`logo-dropzone__area${isDragging ? ' is-dragging' : ''}`}
