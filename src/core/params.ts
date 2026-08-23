@@ -3,21 +3,23 @@ import type {
     CornerDotType,
     CornerSquareType,
     ShapeType,
+    FileExtension,
 } from 'qr-code-styling'
 
-type ErrorCorrection = 'L' | 'M' | 'Q' | 'H'
+export type ErrorCorrection = 'L' | 'M' | 'Q' | 'H'
+export type Format = FileExtension
 export type LogoKind = 'raster' | 'svg'
 
-export type Logo = {
+export interface Logo {
     source: Blob
     kind: LogoKind
 }
 
-export type Params = {
+export interface Params {
     data: string
     logo?: Logo
     logoScale: number
-    imageMargin: number
+    logoMargin: number
     fillColor: string
     backColor: string
     useCustomCornerColors: boolean
@@ -25,9 +27,9 @@ export type Params = {
     cornersDotColor: string
     size: number
     margin: number
-    error: ErrorCorrection
+    errorCorrection: ErrorCorrection
     version?: number
-    format: string
+    format: Format
     dotsType: DotType
     cornersSquareType: CornerSquareType
     cornersDotType: CornerDotType
@@ -36,7 +38,7 @@ export type Params = {
 
 export const DEFAULTS = {
     logoScale: 0.3,
-    imageMargin: 2,
+    logoMargin: 2,
     fillColor: '#000000',
     backColor: '#FFFFFF',
     useCustomCornerColors: false,
@@ -44,33 +46,16 @@ export const DEFAULTS = {
     cornersDotColor: '#000000',
     size: 2048,
     margin: 64,
-    error: 'H',
+    errorCorrection: 'H',
     format: 'png',
     dotsType: 'square',
     cornersSquareType: 'square',
     cornersDotType: 'square',
     shape: 'square',
-} as const
+} as const satisfies Omit<Params, 'data' | 'logo' | 'version'>
 
-export function createParams(data: string): Params {
-    return {
-        data,
-        ...DEFAULTS,
-    }
+export function createParams(data = ''): Params {
+    return { data, ...DEFAULTS }
 }
 
 export type UpdateParam = <K extends keyof Params>(key: K, value: Params[K]) => void
-
-export const DOT_TYPES = [
-    'square', 'dots', 'rounded', 'classy', 'classy-rounded', 'extra-rounded',
-] as const satisfies readonly DotType[]
-
-export const CORNERS_SQUARE_TYPES = [
-    'square', 'dot', 'extra-rounded', 'dots', 'rounded', 'classy', 'classy-rounded',
-] as const satisfies readonly CornerSquareType[]
-
-export const CORNERS_DOT_TYPES = [
-    'square', 'dot', 'dots', 'rounded', 'classy', 'classy-rounded', 'extra-rounded',
-] as const satisfies readonly CornerDotType[]
-
-export const SHAPE_TYPES = ['square', 'circle'] as const satisfies readonly ShapeType[]

@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo } from 'react'
 
 export function useObjectURL(blob: Blob | undefined): string | undefined {
-    const [url, setUrl] = useState<string>()
+    const url = useMemo(() => blob && URL.createObjectURL(blob), [blob])
 
-    useEffect(
-        () => {
-            if (!blob) {
-                setUrl(undefined)
-                return
-            }
-            const u = URL.createObjectURL(blob)
-            setUrl(u)
-            return () => URL.revokeObjectURL(u)
-        }, [blob]
-    )
+    useEffect(() => () => {
+        if (url) URL.revokeObjectURL(url)
+    }, [url])
+
     return url
 }

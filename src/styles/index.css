@@ -1,4 +1,4 @@
-@import './reset.css';
 @import './colors.css';
 @import './tokens.css';
-@import './controls.css';
+@import './reset.css';
+@import '../ui/ui.css';
