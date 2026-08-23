@@ -10,10 +10,11 @@ import {
 import { SliderControl } from '../controls/SliderControl/SliderControl'
 import { SelectControl } from '../controls/SelectControl/SelectControl'
 import { ColorControl } from '../controls/ColorControl/ColorControl'
-import { DataInput } from '../controls/DataInput/DataInput'
+import { QRContentBuilder } from '../QRContentBuilder/QRContentBuilder'
 import { LogoDropzone } from '../controls/LogoDropzone/LogoDropzone'
 import { useTheme } from '../../providers/ThemeProvider/ThemeProvider'
 import { useToast } from '../../providers/ToastProvider/ToastProvider'
+import { iconUrl } from '../../icons'
 
 interface ConfigPanelProps {
     params: Params
@@ -60,15 +61,23 @@ export function ConfigPanel({ params, update, onSubmitData }: ConfigPanelProps) 
                     type="button"
                     className="config-panel__theme-toggle"
                     onClick={toggleTheme}
-                    aria-label="Toggle theme"
+                    aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
-                    {theme === 'light' ? '🌙' : '☀'}
+                    <img
+                        src={iconUrl(theme === 'light' ? 'moon' : 'sun')}
+                        alt=""
+                        width={18}
+                        height={18}
+                    />
                 </button>
             </header>
 
             <div className="config-panel__body">
                 <Section title="Data">
-                    <DataInput onSubmit={onSubmitData} />
+                    <QRContentBuilder
+                        onSerialize={onSubmitData}
+                        onLogoDefault={logo => update('logo', logo)}
+                    />
                 </Section>
 
                 <Section title="Logo">

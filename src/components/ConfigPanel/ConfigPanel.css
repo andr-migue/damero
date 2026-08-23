@@ -45,6 +45,15 @@
     border-color: var(--color-accent);
 }
 
+.config-panel__theme-toggle img {
+    display: block;
+    filter: var(--icon-filter, none);
+}
+
+[data-theme='dark'] .config-panel__theme-toggle img {
+    filter: invert(1);
+}
+
 /* Body: Data on top full width + 4 sections in one row below */
 .config-panel__body {
     flex: 1;

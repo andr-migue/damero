@@ -1,0 +1,85 @@
+.qr-content-builder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Level 1: categories (chips) */
+.qr-content-builder__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.qr-content-builder__category {
+    padding: 4px var(--space-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.qr-content-builder__category:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-strong);
+}
+
+.qr-content-builder__category.is-active {
+    background: var(--color-accent);
+    color: var(--color-neutral-0);
+    border-color: var(--color-accent);
+}
+
+/* Level 2: types (underline tabs) */
+.qr-content-builder__types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.qr-content-builder__type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -1px;
+}
+
+.qr-content-builder__type-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+[data-theme='dark'] .qr-content-builder__type-icon {
+    filter: brightness(0) invert(1);
+}
+
+.qr-content-builder__type:hover {
+    color: var(--color-text);
+}
+
+.qr-content-builder__type.is-active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    font-weight: 500;
+}
+
+.qr-content-builder__form {
+    padding-top: var(--space-xs);
+}
