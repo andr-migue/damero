@@ -12,10 +12,13 @@ interface SliderProps {
 }
 
 export function Slider({ label, value, min, max, step, unit, disabled, onChange }: SliderProps) {
+    const fill = `${((value - min) / (max - min)) * 100}%`
+
     return (
         <Field label={label} hint={unit ? `${value} ${unit}` : value} disabled={disabled}>
             <input
                 className="field__range"
+                style={{ '--fill': fill } as React.CSSProperties}
                 type="range"
                 min={min}
                 max={max}

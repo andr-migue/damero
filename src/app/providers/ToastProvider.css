@@ -24,13 +24,13 @@
     font-size: var(--font-size-sm);
     pointer-events: auto;
     text-align: left;
-    animation: toast-in 0.15s ease-out;
+    animation: toast-in var(--transition) ease-out;
 }
 
 .toast--info { border-left-color: var(--color-accent); }
-.toast--success { border-left-color: #4ade80; }
-.toast--warning { border-left-color: #facc15; }
-.toast--error { border-left-color: #f87171; }
+.toast--success { border-left-color: var(--color-success); }
+.toast--warning { border-left-color: var(--color-warning); }
+.toast--error { border-left-color: var(--color-danger); }
 
 @keyframes toast-in {
     from { opacity: 0; transform: translateY(8px); }

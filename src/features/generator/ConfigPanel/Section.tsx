@@ -8,7 +8,7 @@ interface SectionProps {
 export function Section({ title, children }: SectionProps) {
     return (
         <section className="section">
-            <h3 className="section__title">{title}</h3>
+            <h2 className="section__title">{title}</h2>
             <div className="section__body">{children}</div>
         </section>
     )

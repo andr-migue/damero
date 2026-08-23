@@ -20,7 +20,7 @@
     font: inherit;
     font-size: var(--font-size-sm);
     font-weight: 500;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .type-picker__category:hover {
@@ -31,7 +31,7 @@
 .type-picker__category[aria-selected='true'] {
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-neutral-0);
+    color: var(--color-on-accent);
 }
 
 .type-picker__types {
@@ -55,7 +55,7 @@
     font: inherit;
     font-size: var(--font-size-sm);
     white-space: nowrap;
-    transition: color 0.15s, border-color 0.15s;
+    transition: color var(--transition), border-color var(--transition);
 }
 
 .type-picker__type:hover {

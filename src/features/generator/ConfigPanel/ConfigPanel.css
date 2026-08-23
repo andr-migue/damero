@@ -33,7 +33,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background var(--transition), border-color var(--transition);
 }
 
 .config-panel__theme:hover {
@@ -57,6 +57,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-sm);
     align-content: start;
+    align-items: start;
     padding: var(--space-sm);
 }
 
@@ -95,7 +96,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    height: 100%;
     padding: var(--space-sm);
     background: var(--color-surface-elevated);
     border: 1px solid var(--color-border);
@@ -107,7 +107,7 @@
     flex-direction: column;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-sm);
-    background: var(--color-bg);
+    background: var(--color-inset);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
 }
