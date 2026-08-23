@@ -27,7 +27,7 @@ export const QR_TYPES: readonly QRType[] = [
     ...profileTypes,
     { id: 'vcard',    label: 'vCard',       category: 'contact', icon: 'ui/user-round',     Form: VcardForm },
     { id: 'wifi',     label: 'Wi-Fi',       category: 'utility', icon: 'ui/wifi',           Form: WifiForm },
-    { id: 'geo',      label: 'Geolocation', category: 'utility', icon: 'ui/map-marker',     Form: GeolocationForm },
+    { id: 'geo',      label: 'Geolocation', category: 'utility', icon: 'ui/map-pin',     Form: GeolocationForm },
 ]
 
 export function findType(id: string): QRType {
